@@ -1,7 +1,7 @@
 # Usine de robots
 Qui n'a jamais rêvé de se fabriquer un robot pour exterminer l'humanité faire le café ?
 
-Dans un fichier index.php, qui contiendra tout en haut votre logique PHP, puis le document HTML à proprement parler, vous allez développer un programme capable de créer un nouveau robot à chaque rafraîchissement de la page. Le robot saluera alors l'utilisateur et se présentera. Exemple :
+Dans un fichier index.php, qui contiendra tout en haut votre logique PHP, puis le document HTML à proprement parler, vous allez développer un programme capable de créer un nouveau robot à chaque rafraîchissement de la page;. Le robot saluera alors l'utilisateur et se présentera. Exemple :
 
 « Salut, humain. Je suis VX-2345. »
 
