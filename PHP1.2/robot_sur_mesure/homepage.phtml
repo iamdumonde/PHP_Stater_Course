@@ -1,0 +1,145 @@
+<?php
+require('./generic_functions.php');
+require('./robot_functions.php');
+
+// $bname = $_POST['botname'] ? $_POST['botname'] : generateRandomRobotname();
+$bname;
+
+if (isset($_POST['botname']) && !empty($_POST['botname']) && isset($_POST['submit'])) {
+    $bname = $_POST['botname'];
+} else {
+    $bname = generateRandomRobotname();
+}
+
+$evilness;
+
+if(isset($_POST['evilness'])){
+    if($_POST['evilness'] === "yes"){
+        $evilness = "Extermination ! Extermination !";
+    } 
+    elseif ($_POST['evilness'] === "no"){
+        $evilness = "Voulez-vous un café ?";
+    } 
+    elseif($_POST['evilness'] === "maybe") {
+        $evilness = RobotBehavior();
+    } 
+}  else {
+    $evilness = RobotBehavior();
+}
+
+
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Sur Mesure</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body .container {
+            line-height: 1.5;
+            text-align: center;
+            background-color: #21B66F;
+            padding: 1.2em;
+            border-radius: 10px;
+            box-shadow: 10px 10px lightblue;
+        }
+
+        p {
+            color: #000;
+            font-size: 1.2rem;
+        }
+
+        .btn_div {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="" method="POST">
+        <div class="form-control">
+            <label for="botname">Give a name for your bot :</label>
+            <input type="text" name="botname" id="botname" placeholder="Your BotName">
+        </div>
+
+        <div class="form-control">
+            <p>Votre robot est-il diabolique ?</p>
+            <div>
+                <input type="radio" name="evilness" value="yes" id="yes"></input>
+                <label for="yes">Oui</label>
+            </div>
+            <div>
+                <input type="radio" name="evilness" value="no" id="no"></input>
+                <label for="no">Non</label>
+            </div>
+            <div>
+                <input type="radio" name="evilness" value="maybe" id="maybe"></input>
+                <label for="maybe">Croisons les doigts !</label>
+            </div>
+        </div>
+
+        <div class="form-control">
+            <label for="morality">Specify a morality of your bot:</label>
+            <select name="morality" id="morality">
+                <option value="" selected disabled>Make a choice !</option>
+                <option value="cool">Voulez-vous un café ?</option>
+                <option value="evil">Extermination ! Exterminatin !</option>
+            </select>
+        </div>
+
+        <div class="btn_div">
+            <button type="submit" name="submit">Envoyer</button>
+            <button type="reset">Réinitialiser</button>
+        </div>
+    </form>
+
+    <?php if (isset($_POST['submit'])): ?>
+        <div class="container">
+            <p>
+                <?= greet($bname) ?> !
+            </p>
+            <p>
+                <?= checkEventOld() ?>.
+            </p>
+            <p>
+                <?= chooseRandomNumberAndParity() ?>
+            </p>
+            <p>
+                <?= reverseName($bname) ?>
+            </p>
+            <p>
+                <?= $evilness?>
+            </p>
+
+            <p>
+                <?php if (!empty($morality) && $morality == "cool") {
+                    echo "selected= 'selected'";
+                } else if (!empty($morality) && $morality == "evil") {
+                    echo "selected= 'selected'";
+                } else {
+                    RobotBehavior();
+                }
+                ?>
+            </p>
+
+            <div><a href="./index.php">Return</a></div>
+        </div>
+    <?php endif; ?>
+</body>
+
+</html>

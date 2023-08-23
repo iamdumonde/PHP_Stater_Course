@@ -1,6 +1,6 @@
 <?php
-
-require('./homepage.php');
-
+require('./homepage.phtml');
 
 ?>
+
+
