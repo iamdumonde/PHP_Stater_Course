@@ -124,3 +124,10 @@ CREATE TABLE albumsLIST (
 ## INSERTION DE DONNEES
 INSERT INTO `albums`(`ref`, `name`, `title`, `description`, `duration`, `likes`) VALUES ('XY-123','ELTON John','Sacrifice',"L'album chaud du moment",'450','Cool');
 INSERT INTO `albums` VALUES (NULL,'XZ-124','Petit Miguelito','Petit à Petit',"L'album du descendant direct de Miguelito",'710','Great');
+
+
+## Ajout de clé primaire et modification de la colonne
+ALTER TABLE `shippers` CHANGE `﻿ShipperID` `﻿ShipperID` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`﻿ShipperID`);
+
+## FOREIGN KEY
+ALTER TABLE albums_list ADD CONSTRAINT fk_albums_albumlist FOREIGN KEY (album_id) REFERENCES albums(id);
