@@ -12,6 +12,47 @@
 
 <body>
     <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
         <!-- 
             L'attribut "enctype" spécifie comment les données du formulaire doivent être 
             encodées avant d'être envoyées au server lorsque le formulaire est soumis .
@@ -29,11 +70,16 @@
 
         <form action="server.php" method="post" enctype="multipart/form-data">
             <div class="mb-2">
+                <!-- Empêcher le chargement de fichiers lourds | la taille est spécifiée en Octet, 3mg = 3000000 Octet-->
+                <input type="hidden" name="MAX_FILES_SIZE" value="3000000">
+
                 <label for="file" class="form-label">Importez un fichier !</label>
                 <input type="file" class="form-control" id="file" name="photo_profile">
             </div>
             <button class="btn btn-primary" name="submit">Submit</button>
         </form>
+
+        <a href="download.php?file=img-64edc4af1f97d.jpg">Télécharger image</a>
     </div>
 </body>
 

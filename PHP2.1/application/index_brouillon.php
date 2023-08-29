@@ -5,8 +5,8 @@
 session_save_path("C:/laragon/tmp");
 
 /**
- * session_start() ne crée pas forcément une nouvelle section
- * elle peut en crée quand on en a pas 
+ * session_start() ne crée pas forcément une nouvelle session
+ * elle peut en créer quand on en a pas 
  * ou récupérer l'ancienne session
  */
 session_start();
@@ -31,7 +31,7 @@ session_start();
  * Une superglobale est une variable pré-définie qui stocke des informations 
  * et des données importantes accessibles depuis n'importe où dans 
  * le script PHP sans avoir besoin de la déclarer explicitement comme variable classique:
- * Exemple: $_COOKIE; $_POST; $_GET; $_SESSION
+ * Exemple: $_COOKIE; $_POST; $_GET; $_SESSION; $_FILES
  */
 
 /**fonction qui nous dit où sont stockés les sections côté serveur */
