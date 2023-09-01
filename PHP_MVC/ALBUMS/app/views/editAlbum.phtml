@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+</head>
+
+<body>
+    <h1>Liste des albums :</h1>
+    <ul>
+        <!-- La liste des albums est générée dynamiquement -->
+        <?php foreach ($albums as $album): ?>
+            <li>
+                <?= $album['title'] ?> - <?= $album['artiste']?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+    <h2>Editer un album</h2>
+    <form action="" method="post">
+        <input type="text" name="title" placeholder="Titre de l'album">
+        <input type="text" name="artiste" placeholder="Le nom de l'artiste">
+        <input type="submit" value="Ajouter">
+    </form>
+</body>
+
+</html>
