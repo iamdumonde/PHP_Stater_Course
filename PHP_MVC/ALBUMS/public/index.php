@@ -12,33 +12,38 @@ require "../app/controllers/AlbumController.php";
 $controller = new AlbumController();
 // $controller->home();
 
+//Permet de récupérer la page requêtée ou l'action depuis l'URL
 $request = $_SERVER['REQUEST_URI'];
 //On vérifie s'il y'a une chaîne de requête
 $queryString = strpos($request, "?");//string position /rechercher l'index d'un caractère donné
 
-if($request){
-    echo ($request = strstr($request, "action=")); //Trouver la première accurence de action
+if($queryString){
+    $request = substr($request, 0, $queryString); //Trouver la première accurence de action
 }
-echo $queryString;
-exit;
+// echo $queryString;
+// exit;
 
-if($request === "/"){
+//Définition des routes et attribution des controlleurs appropriés
+if($request === "/home" || $request === "/"){
     $controller->home();
 } 
-elseif ($request === '/edit') {
+elseif ($request === "/add") {
+    # code...
+    echo "adding";
+    $controller->addAlbum($_POST["title"], $_POST["artiste"]);
+    header('Location : /home'); //Redirection après l'ajout
+} 
+elseif ($request === "/edit") {
     # code...
 } 
-elseif ($request === '/update') {
+elseif ($request === "/update") {
     # code...
 } 
-elseif ($request === '/destroy') {
-    # code...
-} 
-elseif ($request === '/add') {
+elseif ($request === "/destroy") {
     # code...
 } 
 else {
-    require APP_ROOT . "/app/views._404.phtml";
+    // require APP_ROOT . "/app/views._404.phtml";
 }
 
 

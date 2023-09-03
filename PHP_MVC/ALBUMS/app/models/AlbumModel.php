@@ -1,7 +1,4 @@
 <?php
-
-
-
 // AlbumModel::getAlbums();
 class AlbumModel
 {

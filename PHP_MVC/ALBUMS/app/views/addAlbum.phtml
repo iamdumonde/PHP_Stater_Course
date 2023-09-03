@@ -1,12 +1,27 @@
+<?php
+// echo '<pre>';
+// print_r($albums);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Album</title>
+    <title>Qjout d'un nouvel album</title>
 </head>
+
 <body>
-    
+    <h1>Ajout d'un nouveau album</h1>
+    <form action="/add" method="post">
+        <label for="#">Title : <input type="text" name="title" placeholder="Titre de l'album"></label><br>
+        <label for="#">Artiste: <input type="text" name="artiste" placeholder="Le nom de l'artiste"></label><br>
+        <input type="submit" value="Ajouter">
+    </form>
+  <a href="/home">Back to Album List</a>
 </body>
+
 </html>

@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums</title>
+    <title>Liste des Albums</title>
 </head>
 
 <body>
@@ -21,14 +21,16 @@
         <?php foreach ($albums as $album): ?>
             <li>
                 <?= $album['title'] ?> - <?= $album['artiste']?>
+                <a href="/edit?id=<?php echo $album['id']; ?>">Modifier</a>
+                <a href="/delete?id=<?php echo $album['id']; ?>">Suprrimer</a>
             </li>
         <?php endforeach; ?>
     </ul>
 
-    <h2>Ajouter un album</h2>
-    <form action="index.php?action=/add" method="post">
-        <input type="text" name="title" placeholder="Titre de l'album">
-        <input type="text" name="artiste" placeholder="Le nom de l'artiste">
+    <h2>Ajouter un nouvel album</h2>
+    <form action="/add" method="post">
+        <label for="#">Title : <input type="text" name="title" placeholder="Titre de l'album"></label>
+        <label for="#">Artiste: <input type="text" name="artiste" placeholder="Le nom de l'artiste"></label>
         <input type="submit" value="Ajouter">
     </form>
 </body>

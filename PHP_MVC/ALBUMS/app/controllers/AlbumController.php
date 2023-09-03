@@ -10,8 +10,10 @@ class AlbumController {
         require (APP_ROOT ."/app/views/home.phtml");
     }
 
-    public function create() {
+    public function addAlbum($title, $artiste) {
         //Afficher le formulaire de création d'album
+        AlbumModel::addAlbum($title, $artiste);
+        require APP_ROOT."/app/views/addAlbum.phtml";
     }
 
     public function store($title, $artiste) {
