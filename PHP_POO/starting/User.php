@@ -21,6 +21,7 @@ class User
         echo "Je m'appelle $this->name $this->lastname." . "J'ai " . self::pieds . "pieds .";
     }
 
+    
 
 }
 
