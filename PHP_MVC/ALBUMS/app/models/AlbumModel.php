@@ -38,13 +38,24 @@ class AlbumModel
         if($pdo !== null){
             try {
                 //code... la requête SQL
-                $sql = "INSERT INTO `albums`(`title`, `artiste`) VALUES (?,?);";
-                //Statement
+                //Utilisation de marqueurs de substition
+                // $sql = "INSERT INTO `albums`(`title`, `artiste`) VALUES (?,?);";
+                //Préparer la requête
+                // $stmt = $pdo->prepare($sql);
+                // $albumAdded = $stmt->execute([$title, $artiste]);
+
+                //Utilisation de marqueurs ou paramètres nommées
+                //avantages des marqueurs nommées l'ordre importe peu
+                $sql = "INSERT INTO `albums`(`title`, `artiste`) VALUES (:t, :a);";
                 $stmt = $pdo->prepare($sql);
-                $albumAdded = $stmt->execute([$title, $artiste]);
+                $stmt->execute([
+                    ":t" => $title, 
+                    ":a" => $artiste
+                ]);
+                return true;
 
                 //Assure the success of the add
-                if($albumAdded){
+                if($stmt){
                     echo "User added successfully";
                 } else {
                     echo "Add failed !";
@@ -52,6 +63,28 @@ class AlbumModel
     
             } catch (\PDOException $e) {
                 echo "Erreur " . $e->getMessage();
+                return false;
+            }
+
+        }
+    }
+
+    //Méthode pour supprimer un album (Delete)
+    public static function deleteAlbum(int $id)
+    {
+        //Récupérer ici l'objet de connection à la base de donnée
+        $pdo = self::getConnection();
+        if($pdo !== null){
+            try {
+                //code...
+                $sql = "DELETE FROM albums WHERE id = :id;";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([":id" => $id]);
+                return true;
+
+            } catch (\PDOException $e) {
+                echo "Erreur " . $e->getMessage();
+                return false;
             }
 
         }
@@ -98,48 +131,49 @@ class AlbumModel
         if($pdo !== null){
             try {
                 //code... SQL Request
-                $sql = "SELECT * FROM `albums` WHERE id = ?;";
-                //Statement
+                $sql = "SELECT * FROM `albums` WHERE id = :id;";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$id]);
+                $stmt->execute([":id" => $id]);
+                return $stmt->fetchAll()[0];
+                // return $stmt->fetch()[0];
+
 
             } catch (\PDOException $e) {
                 echo "Erreur " . $e->getMessage();
+                return [];//Si ça ne passe pas , retourne un tableau vide
             }
 
         }
     }
+    
 
-    //Méthode pour modifier un album (Update)
-    public static function updateAlbum(int $id, string $title, string $artiste)
-    {
-        //Récupérer ici l'objet de connection à la base de donnée
-        $pdo = self::getConnection();
-        if($pdo !== null){
-            try {
-                //code... SQL Request
-            
-            } catch (\PDOException $e) {
-                echo "Erreur " . $e->getMessage();
-            }
+     //Méthode pour modifier un album (Update)
+     public static function updateAlbum(int $id, string $title, string $artiste)
+     {
+         //Récupérer ici l'objet de connection à la base de donnée
+         $pdo = self::getConnection();
+         if($pdo !== null){
+             try {
+                 //code... SQL Request
+                 $sql = "UPDATE albums SET title = :title, artiste = :artiste WHERE id = :id";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ":title" => $title,
+                    ":artiste" => $artiste,
+                    ":id" => $id
+                ]);
 
-        }
-    }
+                return true; //Mise à jour réussie
+             
+             } catch (\PDOException $e) {
+                 echo "Erreur " . $e->getMessage();
+                return false; //Mise à jour échouée
+             }
+ 
+         }
+     }
+   
 
-    //Méthode pour supprimer un album (Delete)
-    public static function deleteAlbum(int $id)
-    {
-        //Récupérer ici l'objet de connection à la base de donnée
-        $pdo = self::getConnection();
-        if($pdo !== null){
-            try {
-                //code...
-            } catch (\PDOException $e) {
-                echo "Erreur " . $e->getMessage();
-            }
-
-        }
-    }
 
 
 }

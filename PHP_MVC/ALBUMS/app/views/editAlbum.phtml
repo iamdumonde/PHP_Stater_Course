@@ -9,21 +9,27 @@
 </head>
 
 <body>
-    <h1>Liste des albums :</h1>
-    <ul>
-        <!-- La liste des albums est générée dynamiquement -->
-        <?php foreach ($albums as $album): ?>
-            <li>
-                <?= $album['title'] ?> - <?= $album['artiste']?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+    <h1>Modifier un album</h1>
+    <pre>
+        <?= print_r($album) ?>
+    </pre>
+    <form action="/update" method="post">
+        <input 
+        type="hidden" 
+        name="id" 
+        value="<?php echo $album['id']; ?>">
 
-    <h2>Editer un album</h2>
-    <form action="" method="post">
-        <input type="text" name="title" placeholder="Titre de l'album">
-        <input type="text" name="artiste" placeholder="Le nom de l'artiste">
-        <input type="submit" value="Ajouter">
+        <label>Titre: 
+            <input type="text"
+         name="title" 
+         value="<?php echo $album['title']; ?>"></label><br>
+
+        <label>Artiste: 
+            <input type="text" 
+            name="artiste" 
+            value="<?php echo $album['artiste']; ?>"></label><br>
+
+        <input type="submit" value="Mettre à jour">
     </form>
 </body>
 

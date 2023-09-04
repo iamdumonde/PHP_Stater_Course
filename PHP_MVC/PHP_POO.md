@@ -1,0 +1,16 @@
+## PHP-POO
+- Classes et Objets
+- Espaces de noms
+- Standards de Codage & PSR4
+- Constantes de classes
+- Propriétés et Méthodes Statiques
+- Interfaces & Polymorphisme
+- Méthodes Magiques
+- Traits
+- Classes Anonymes
+- Stockage de Variables & Comparaison d'objects
+- DocBlock PHP
+- clonage d'objets
+- Sérialisation des objets
+- Entrées HTTP
+- 

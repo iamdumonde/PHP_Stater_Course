@@ -14,33 +14,58 @@ $controller = new AlbumController();
 
 //Permet de récupérer la page requêtée ou l'action depuis l'URL
 $request = $_SERVER['REQUEST_URI'];
+$debutChaineRequete = strpos($request, "?");
+if ($debutChaineRequete !== false){
+    $request = substr($request, 0, $debutChaineRequete);
+}
+
 //On vérifie s'il y'a une chaîne de requête
 $queryString = strpos($request, "?");//string position /rechercher l'index d'un caractère donné
-
 if($queryString){
-    $request = substr($request, 0, $queryString); //Trouver la première accurence de action
+    $request = substr($request, 0, $queryString); //Trouver la première occurence de action
 }
 // echo $queryString;
 // exit;
 
 //Définition des routes et attribution des controlleurs appropriés
+//Les controlleurs frontals
 if($request === "/home" || $request === "/"){
     $controller->home();
 } 
+
 elseif ($request === "/add") {
     # code...
     echo "adding";
-    $controller->addAlbum($_POST["title"], $_POST["artiste"]);
-    header('Location : /home'); //Redirection après l'ajout
+    $controller->store($_POST["title"], $_POST["artiste"]);
+    // header("HTTP/1.1 302 Found");
+    header("Location : /");
+    // header('Location :/home'); //Redirection après l'ajout
+    //header("HTTP/1.1 301"); //301 spécifie une redirection permanente / 302 redirection temporaire 
 } 
+
+elseif ($request === '/delete') {
+    # code...
+    $id = (int) $_GET["id"];//identifiant à supprimer
+    $controller->destroy($id);
+    echo "En cours de suppression de l'album";
+    //delete/1 = "/";
+    //delete?id=1;
+} 
+
 elseif ($request === "/edit") {
     # code...
+    $id = (int) $_GET["id"];
+    $controller->editAlbum($id);
+    echo "edition du formulaire ";
+
 } 
 elseif ($request === "/update") {
     # code...
-} 
-elseif ($request === "/destroy") {
-    # code...
+    $id = $_POST["id"];
+    $title = $_POST["title"];
+    $artiste = $_POST["artiste"];
+    $controller->updateAlbum($id, $title, $artiste);
+    header("Location: /home"); //Redirection après mise à jour
 } 
 else {
     // require APP_ROOT . "/app/views._404.phtml";
