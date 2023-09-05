@@ -1,6 +1,6 @@
 <?php
 namespace App;
-class Employee extends Personne {
+class Employee  {
     public function work(){
         echo "Je travaille !";
     }
